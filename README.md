@@ -4,6 +4,7 @@ Post flash setup for NVIDIA Jetson TK1 Development Kit. After flashing the Jetso
 To configure the system, download this repository. Open a Terminal, switch to the repository directory, and exectue the configureSystem switch, i.e.
 
 $ cd postFlash
+
 $ ./configureSystem.sh
 
 Install notes:
