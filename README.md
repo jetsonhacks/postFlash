@@ -9,7 +9,7 @@ $ ./configureSystem.sh
 
 Install notes:
 
-Because Firefox on the Jetson has issues downloading zip files from github on the Jetson, the Chromium browser is installed. 
+Because Firefox on the Jetson has issues downloading zip files on the Jetson, the Chromium browser is installed. 
 
 To save power, the Jetson will autosuspend the USB ports. In a desktop environment, this may cause problems with various USB devices such as webcams. The installed startup script will disable USB autosuspend.
 
