@@ -1,7 +1,7 @@
 # postFlash
 Post flash setup for NVIDIA Jetson TK1 Development Kit. After flashing the Jetson with L4T 21.2, there are a couple of extra settings that can changed for better performance when using the Jetson as a desktop. 
 
-To configure the system, download or clone this repository. Open a Terminal, switch to the repository directory, and exectue the configureSystem switch, i.e.
+To configure the system, download or clone this repository. Open a Terminal, switch to the repository directory, and execute the configureSystem switch, i.e.
 
 $ cd postFlash
 
