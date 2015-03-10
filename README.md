@@ -1,11 +1,13 @@
 # postFlash
-Post flash setup for NVIDIA Jetson TK1 Development Kit. After flashing the Jetson with L4T 21.X, there are a couple of extra settings that can changed for better performance when using the Jetson as a desktop. 
+Post flash setup for NVIDIA Jetson TK1 Development Kit. After flashing the Jetson with L4T 21.X, there are a couple of extra settings that can changed for better performance when using the Jetson as a desktop. In order to retrieve this repository, you will need to have 'git' installed. You can install 'git' by executing from a Terminal:
+
+$ sudo apt-get install git
 
 To configure the system, clone this repository with the appropriate 'Tag'. For example,
 
 $ git clone -b JetsonTK1-L4T-21.3 https://github.com/jetsonhacks/postFlash.git
 
-will clone the appropriate code for the L4T-21.3 release. These scripts are currently available for L4T-21.3 and L4T-21.2.
+will get the appropriate code for the L4T-21.3 release. Scripts are currently available for L4T-21.3 and L4T-21.2.
 
 Once downloaded, open a Terminal, switch to the repository directory, and execute the configureSystem switch, i.e.
 
