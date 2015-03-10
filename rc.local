@@ -9,8 +9,6 @@
 # In order to enable or disable this script just change the execution
 # bits.
 #
-# Slow down Ethernet to 100Mb/S, LT4 21.2 has a bug when running 1Gb/S
-sudo mii-tool -F 100baseTx-FD eth0
 # disable USB autosuspend
 /usr/local/bin/disableUSBAutosuspend.sh
 # Turn up the CPU and GPU for max performance
