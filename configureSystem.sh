@@ -1,5 +1,5 @@
 #!/bin/sh
-# Configure a NVIDIA Jetson TK1 post flash - L4T 21.2
+# Configure a NVIDIA Jetson TK1 post flash - L4T 21.3
 # Configure for desktop, maximum performance, USB 3.0
 # These repositories should already be in place, but check to make sure
 sudo apt-add-repository universe
