@@ -14,4 +14,9 @@
 # Turn up the CPU and GPU for max performance
 /usr/local/bin/maxPerformance.sh
 
+
+# Add scripts for further configuration
+
+
+
 exit 0
