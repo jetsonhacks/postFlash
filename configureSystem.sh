@@ -2,6 +2,9 @@
 # Configure a NVIDIA Jetson TK1 post flash - L4T 21.3
 # Configure for desktop, maximum performance, USB 3.0
 # These repositories should already be in place, but check to make sure
+
+sudo apt-mark hold xserver-xorg-core # http://elinux.org/Jetson_TK1#An_important_step_before_connecting_the_Jetson_to_Internet
+
 sudo apt-add-repository universe
 sudo apt-add-repository multiverse
 sudo apt-get update
