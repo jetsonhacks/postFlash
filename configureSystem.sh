@@ -18,6 +18,8 @@ sudo apt-get install chromium-browser -y
 sudo apt-get install git -y
 sudo apt-get install aptitude -y
 
+sudo apt-get install tightvncserver
+
 # Add scripts to disable USB autosuspend, run at maximum performance
 sudo cp maxPerformance.sh /usr/local/bin
 # And add them to the startup script, as well as a few other tidbits
