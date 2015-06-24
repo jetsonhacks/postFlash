@@ -1,0 +1,74 @@
+Notes for installing FTDI Driver
+
+http://elinux.org/Jetson/Tutorials/Program_An_Arduino
+
+FTDI kernel module
+Upon connecting an Arduino's USB port to the Jetson, we can see the Arduino uses an FTDI serial-to-USB converter:
+
+ubuntu@tegra-ubuntu:~$ lsusb
+Bus 002 Device 006: ID 0403:6001 Future Technology Devices International, Ltd FT232 USB-Serial (UART) IC
+However support for the FTDI converter device is not set in the kernel configuration by default:
+
+ubuntu@tegra-ubuntu:~$ zcat /proc/config.gz | grep FTDI
+# CONFIG_USB_SERIAL_FTDI_SIO is not set
+# CONFIG_USB_FTDI_ELAN is not set
+We will need to compile the FTDI kernel module from source to use the device.
+
+L4T kernel source
+First, download the kernel sources (kernel_src.tar.bz2) from https://developer.nvidia.com/linux-tegra-rel-19 and copy the archive to the Jetson, into the ubuntu user home directory. Then extract the tarball to ~/kernel:
+
+tar xvjf kernel_src.tar.bz2
+Configuring the kernel
+Copy over the Jetson's existing kernel configuration to the newly-extracted kernel source:
+
+zcat /proc/config.gz > ~/kernel/.config
+Next build & launch the menuconfig tool to configure the kernel options. menuconfig requires ncurses to be installed, hence the apt-get command first.
+
+sudo apt-get install ncurses-bin libncurses5-dev
+make menuconfig
+Navigate to Device Drivers -> USB Support -> USB Serial Converter Support
+
+Choose 'M'odule for USB FTDI Single Port Serial Driver
+
+Save changes and exit.
+
+Verify that the FTDI component is now set to build as module:
+
+ubuntu@tegra-ubuntu:~/kernel$ cat .config | grep FTDI
+CONFIG_USB_SERIAL_FTDI_SIO=m
+# CONFIG_USB_FTDI_ELAN is not set
+Building modules
+make prepare
+make modules_prepare
+
+make M=drivers/usb/serial/
+  Building modules, stage 2.
+  MODPOST 2 modules
+  CC      drivers/usb/serial/baseband_usb_chr.mod.o
+  LD [M]  drivers/usb/serial/baseband_usb_chr.ko
+  CC      drivers/usb/serial/ftdi_sio.mod.o
+  LD [M]  drivers/usb/serial/ftdi_sio.ko
+Installing the FTDI module
+sudo cp drivers/usb/serial/ftdi_sio.ko /lib/modules/$(uname -r)/kernel //MUST MATCH CURRENT KERNAL from uname -r
+sudo depmod -a
+Verify installation
+Now when the Arduino is plugged in, we see the FTDI module loaded and /dev node assigned:
+
+ubuntu@tegra-ubuntu:~/kernel$ dmesg | grep usb
+[   57.385970] usb 2-1.5: new full-speed USB device number 5 using tegra-ehci
+[   57.407931] usb 2-1.5: New USB device found, idVendor=0403, idProduct=6001
+[   57.407950] usb 2-1.5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[   57.407964] usb 2-1.5: Product: FT232R USB UART
+[   57.407976] usb 2-1.5: Manufacturer: FTDI
+[   57.407987] usb 2-1.5: SerialNumber: A601NG2B
+[   57.479238] ftdi_sio: version magic '3.10.24 SMP preempt mod_unload ARMv7 p2v8 ' should be '3.10.24-gf455cd4 SMP preempt mod_unload ARMv7 p2v8 '
+[   57.504885] usbcore: registered new interface driver ftdi_sio
+[   57.507384] usbserial: USB Serial support registered for FTDI USB Serial Device
+[   57.508073] ftdi_sio 2-1.5:1.0: FTDI USB Serial Device converter detected
+[   57.508917] usb 2-1.5: Detected FT232RL
+[   57.508934] usb 2-1.5: Number of endpoints 2
+[   57.508948] usb 2-1.5: Endpoint 1 MaxPacketSize 64
+[   57.508960] usb 2-1.5: Endpoint 2 MaxPacketSize 64
+[   57.508971] usb 2-1.5: Setting MaxPacketSize 64
+[   57.511143] usb 2-1.5: FTDI USB Serial Device converter now attached to ttyUSB0
+In this case, the port has been assigned to /dev/ttyUSB0. Remember this for when using the Arduino IDE.
