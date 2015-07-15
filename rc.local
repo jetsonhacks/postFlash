@@ -9,8 +9,6 @@
 # In order to enable or disable this script just change the execution
 # bits.
 #
-# disable USB autosuspend
-/usr/local/bin/disableUSBAutosuspend.sh
 # Turn up the CPU and GPU for max performance
 /usr/local/bin/maxPerformance.sh
 
