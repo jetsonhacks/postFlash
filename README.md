@@ -7,7 +7,7 @@ To configure the system, clone this repository:
 
 $ git clone https://github.com/jetsonhacks/postFlash.git
 
-This is for the current release, L4T 21.4
+This is for the current release, L4T 21.5
 
 For earlier releases, clone this repository with the appropriate 'Tag'. For example,
 
@@ -23,7 +23,7 @@ $ ./configureSystem.sh
 
 Install notes:
 
-Because Firefox on the Jetson has issues downloading zip files on the Jetson, the Chromium browser is installed. 
+Because Firefox on the Jetson has issues downloading zip files on the Jetson, the Chromium browser is installed.
 
 To save power, the Jetson will autosuspend the USB ports. In a desktop environment, this may cause problems with various USB devices such as webcams. USB autosuspend is disabled in the /boot/extlinux/extlinux.conf used by the uboot bootloader..
 
